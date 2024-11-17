@@ -23,34 +23,34 @@ for c in df.columns:
 for c in df.columns[df.nunique()==2]:
     df[c] = (df[c]==1)*1.0
 
-# 1. Calculate the number of unique values for each column
+# Calculate the number of unique values for each column
 print('Count of unique values in each column:')
 print(df.nunique())
 
-# 2. Set target, survival_status,as y; features (dropping survival status and time) as X
+# Set target, survival_status,as y; features (dropping survival status and time) as X
 y = df.survival_status
 X= df.drop(columns=['survival_time','survival_status'])
 
-# 3. Define lists of numeric and categorical columns based on number of unique values
+# Define lists of numeric and categorical columns based on number of unique values
 num_cols = X.columns[X.nunique()>7]
 cat_cols = X.columns[X.nunique()<=7]
 
-# 4. Print columns with missing values
+# Print columns with missing values
 print('Columns with missing values:')
 print(X.columns[X.isnull().sum()>0])
 
-# 5. Split data into train/test split
+# Split data into train/test split
 x_train, x_test, y_train, y_test = train_test_split(X,y, random_state=0, test_size=0.2)
 
-# 6. Create categorical preprocessing pipeline
+# Create categorical preprocessing pipeline
 # Using mode to fill in missing values and OHE
 cat_vals = Pipeline([("imputer",SimpleImputer(strategy='most_frequent')), ("ohe",OneHotEncoder(sparse=False, drop='first', handle_unknown = 'ignore'))])
 
-# 7. Create numerical preprocessing pipeline
+# Create numerical preprocessing pipeline
 # Using mean to fill in missing values and standard scaling of features
 num_vals = Pipeline([("imputer",SimpleImputer(strategy='mean')), ("scale",StandardScaler())])
 
-# 8. Create column transformer that will preprocess the numerical and categorical features separately
+# Create column transformer that will preprocess the numerical and categorical features separately
 preprocess = ColumnTransformer(
     transformers=[
         ("cat_process", cat_vals, cat_cols),
@@ -58,30 +58,30 @@ preprocess = ColumnTransformer(
     ]
 )
 
-# 9. Create a pipeline with preprocess, PCA, and a logistic regresssion model
+# Create a pipeline with preprocess, PCA, and a logistic regresssion model
 pipeline = Pipeline([("preprocess",preprocess), 
                      ("pca", PCA()),
                      ("clf",LogisticRegression())])
 
-# 10. Fit the pipeline on the training data
+# Fit the pipeline on the training data
 pipeline.fit(x_train, y_train)
 #Predict the pipeline on the test data
 print('Pipeline Accuracy Test Set:')
 print(pipeline.score(x_test,y_test))
 
-# 11. Define search space of hyperparameters
+# Define search space of hyperparameters
 search_space = [{'clf':[LogisticRegression()],
                      'clf__C': np.logspace(-4, 2, 10),
                 'pca__n_components':np.linspace(30,37,3).astype(int)},
                    ]
-#12. Search over hyperparameters abolve to optimize pipeline and fit
+# Search over hyperparameters above to optimise pipeline and fit
 gs = GridSearchCV(pipeline, search_space, cv=5)
 gs.fit(x_train, y_train)
 
-# 13. Save the best estimator from the gridsearch and print attributes and final accuracy on test set
+# Save the best estimator from the gridsearch and print attributes and final accuracy on test set
 best_model = gs.best_estimator_
 
-# 14. Print attributes of best_model
+# Print attributes of best_model
 print('The best classification model is:')
 print(best_model.named_steps['clf'])
 print('The hyperparameters of the best classification model are:')
@@ -89,6 +89,6 @@ print(best_model.named_steps['clf'].get_params())
 print('The number of components selected in the PCA step are:')
 print(best_model.named_steps['pca'].n_components)
 
-# 15. Print final accuracy score 
+# Print final accuracy score 
 print('Best Model Accuracy Test Set:')
 print(best_model.score(x_test,y_test))
