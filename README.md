@@ -57,10 +57,21 @@ Ensure you have the following libraries installed:
 Install them using:
 ```bash
 pip install numpy pandas scikit-learn scipy
-
+```
 ## Usage
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/your-repository-name.git
    cd your-repository-name
-2. Ensure 
+   ```
+2. Ensure the `bone-marrow.arff` file is in the same directory as `solution.py`.
+3. Run the script:
+   ```bash
+   python solution.py
+   ```
+4. Observe the results in the terminal, including model accuracy and the best configuration.
+
+## Warnings
+The script may generate warnings during runtime, such as:
+- **Unknown categories during one-hot encoding**: Indicates that unseen categories in the test set were encoded as all zeros. This does not affect the accuracy of the results.
+
