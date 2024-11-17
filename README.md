@@ -1,7 +1,7 @@
 # Bone Marrow Transplant Machine Learning Pipeline
 
 ## Project Overview
-This project implements a **machine learning pipeline** to analyze data from bone marrow transplants. The pipeline preprocesses the data, applies dimensionality reduction using **Principal Component Analysis (PCA)**, and trains a **Logistic Regression model** to predict patient survival outcomes. The script also includes hyperparameter optimization using **GridSearchCV** to identify the best model configuration.
+This project implements a **machine learning pipeline** to analyse data from bone marrow transplants. The pipeline preprocesses the data, applies dimensionality reduction using **Principal Component Analysis (PCA)**, and trains a **Logistic Regression model** to predict patient survival outcomes. The script also includes hyperparameter optimisation using **GridSearchCV** to identify the best model configuration.
 
 ---
 
@@ -12,7 +12,7 @@ This project implements a **machine learning pipeline** to analyze data from bon
      - Categorical data: Filled using the most frequent value.
      - Numerical data: Filled using the mean.
    - One-hot encoding for categorical variables with a drop-first strategy to avoid multicollinearity.
-   - Standard scaling for numerical variables to normalize the data.
+   - Standard scaling for numerical variables to normalise the data.
 
 2. **Pipeline**:
    - Combines preprocessing steps with PCA and Logistic Regression into a single **`scikit-learn` Pipeline**.
@@ -20,7 +20,7 @@ This project implements a **machine learning pipeline** to analyze data from bon
 
 3. **Hyperparameter Tuning**:
    - Uses **GridSearchCV** to find the best hyperparameters for:
-     - Regularization strength (`C`) in Logistic Regression.
+     - Regularisation strength (`C`) in Logistic Regression.
      - Number of PCA components (`n_components`).
 
 4. **Evaluation**:
