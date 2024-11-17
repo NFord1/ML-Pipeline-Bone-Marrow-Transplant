@@ -57,3 +57,10 @@ Ensure you have the following libraries installed:
 Install them using:
 ```bash
 pip install numpy pandas scikit-learn scipy
+
+## Usage
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repository-name.git
+   cd your-repository-name
+2. Ensure 
