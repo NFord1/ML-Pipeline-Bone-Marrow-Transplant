@@ -60,10 +60,6 @@ pip install numpy pandas scikit-learn scipy
 ```
 ## Usage
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/your-repository-name.git
-   cd your-repository-name
-   ```
 2. Ensure the `bone-marrow.arff` file is in the same directory as `solution.py`.
 3. Run the script:
    ```bash
